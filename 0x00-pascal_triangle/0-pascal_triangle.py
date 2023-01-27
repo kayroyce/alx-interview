@@ -1,10 +1,28 @@
 def pascal_triangle(n):
-    y=n
+    """returns a list of lists of integers representing
+    the Pascal's triangle of n
+    Args:
+        n (int): size of triangle
+    """
+
+    left, current, right = [], [], []
+
     if n <= 0:
         return []
-    for x in range(2, n+1):
-        y=y*x
-    return y
 
-    def combination(m,n):
-        result = pascal_triangle(m)//pascal_triangle(m-n)*fact
+    current.append(1)
+    left.append(current)
+    for i in range(n - 1):
+        if len(left) == 1:
+            current = [1, n-1]
+            left.append(current)
+            continue
+
+        right.append(1)
+        for j in range(0, len(current) - 1):
+            right.append(current[j] + current[j+1])
+        right.append(1)
+        left.append(right)
+        current = right
+        right = []
+    return left
