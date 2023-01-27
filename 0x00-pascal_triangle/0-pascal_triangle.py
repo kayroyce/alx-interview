@@ -15,7 +15,7 @@ def pascal_triangle(n):
     left.append(current)
     for i in range(n - 1):
         if len(left) == 1:
-            current = [1, n-1]
+            current = [1, 1]
             left.append(current)
             continue
 
