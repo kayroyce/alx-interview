@@ -6,24 +6,16 @@ def pascal_triangle(n):
        Args: n (int): size of triangle
     """
 
-    left, current, right = [], [], []
+    triangle = []
+    for i in range(1, n+1):
+        row = []
+        for j in range(i):
+            if j == 0 or j == i-1:
+                n = 1
+                row.append(n)
+            else:
+                n = triangle[i-2][j-1] + triangle[i-2][j]
+                row.append(n)
+        triangle.append(row)
 
-    if n <= 0:
-        return []
-
-    current.append(1)
-    left.append(current)
-    for i in range(n - 1):
-        if len(left) == 1:
-            current = [1, 1]
-            left.append(current)
-            continue
-
-        right.append(1)
-        for j in range(0, len(current) - 1):
-            right.append(current[j] + current[j+1])
-        right.append(1)
-        left.append(right)
-        current = right
-        right = []
-    return left
+    return triangle
